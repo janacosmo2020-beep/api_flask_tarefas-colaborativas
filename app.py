@@ -15,5 +15,9 @@ tarefas = [
     }
 ]
 
+@app.route("/tarefas", methods=["GET"])
+def listar_tarefas():
+    return jsonify(tarefas)
+
 if __name__ == "__main__":
     app.run(debug=True)
