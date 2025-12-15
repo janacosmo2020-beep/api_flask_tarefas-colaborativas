@@ -62,5 +62,18 @@ def deletar_tarefa(id):
             return jsonify({"mensagem": "Tarefa removida"})
     return jsonify({"erro": "Tarefa não encontrada"}), 404
 
+@app.route("/tarefas/<int:id>/colaboradores", methods=["PUT"])
+def adicionar_colaborador(id):
+    nome_colaborador = request.get_json().get("colaborador")
+    for tarefa in tarefas:
+        if tarefa["id"] == id:
+            tarefa["colaboradores"].append(nome_colaborador)
+            return jsonify(tarefa)
+    return jsonify({"erro": "Tarefa não encontrada"}), 404
+
+{
+  "colaborador": "Carlos"
+}
+
 if __name__ == "__main__":
     app.run(debug=True)
