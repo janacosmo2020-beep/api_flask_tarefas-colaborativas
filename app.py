@@ -26,5 +26,18 @@ def buscar_tarefa(id):
             return jsonify(tarefa)
     return jsonify({"erro": "Tarefa não encontrada"}), 404
 
+@app.route("/tarefas", methods=["POST"])
+def criar_tarefa():
+    nova_tarefa = request.get_json()
+    nova_tarefa["id"] = tarefas[-1]["id"] + 1
+    tarefas.append(nova_tarefa)
+    return jsonify(nova_tarefa), 201
+
+{
+  "titulo": "Desenvolvimento de API",
+  "descricao": "Criar uma API RESTful utilizando Flask",
+  "colaboradores": ["Ana", "Carlos"]
+}
+
 if __name__ == "__main__":
     app.run(debug=True)
