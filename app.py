@@ -39,5 +39,28 @@ def criar_tarefa():
   "colaboradores": ["Ana", "Carlos"]
 }
 
+@app.route("/tarefas/<int:id>", methods=["PUT"])
+def atualizar_tarefa(id):
+    dados = request.get_json()
+    for tarefa in tarefas:
+        if tarefa["id"] == id:
+            tarefa.update(dados)
+            return jsonify(tarefa)
+    return jsonify({"erro": "Tarefa não encontrada"}), 404
+
+{
+  "titulo": "Desenvolvimento da API RESTful",
+  "descricao": "Criar endpoints de GET, POST, PUT, DELETE",
+  "colaboradores": ["Ana", "Carlos", "João"]
+}
+
+@app.route("/tarefas/<int:id>", methods=["DELETE"])
+def deletar_tarefa(id):
+    for tarefa in tarefas:
+        if tarefa["id"] == id:
+            tarefas.remove(tarefa)
+            return jsonify({"mensagem": "Tarefa removida"})
+    return jsonify({"erro": "Tarefa não encontrada"}), 404
+
 if __name__ == "__main__":
     app.run(debug=True)
